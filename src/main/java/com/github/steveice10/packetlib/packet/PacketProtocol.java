@@ -1,7 +1,6 @@
 package com.github.steveice10.packetlib.packet;
 
 import com.github.steveice10.packetlib.Client;
-import com.github.steveice10.packetlib.Server;
 import com.github.steveice10.packetlib.Session;
 import com.github.steveice10.packetlib.crypt.PacketEncryption;
 

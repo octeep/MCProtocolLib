@@ -1,6 +1,5 @@
 package com.github.steveice10.packetlib.tcp;
 
-import com.github.steveice10.packetlib.Server;
 import com.github.steveice10.packetlib.packet.PacketProtocol;
 import io.netty.channel.ChannelHandlerContext;
 

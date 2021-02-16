@@ -129,7 +129,6 @@ import com.github.steveice10.mc.protocol.packet.status.client.StatusQueryPacket;
 import com.github.steveice10.mc.protocol.packet.status.server.StatusPongPacket;
 import com.github.steveice10.mc.protocol.packet.status.server.StatusResponsePacket;
 import com.github.steveice10.packetlib.Client;
-import com.github.steveice10.packetlib.Server;
 import com.github.steveice10.packetlib.Session;
 import com.github.steveice10.packetlib.crypt.AESEncryption;
 import com.github.steveice10.packetlib.crypt.PacketEncryption;
