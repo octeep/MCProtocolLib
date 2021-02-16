@@ -48,14 +48,6 @@ public abstract class PacketProtocol {
     public abstract void newClientSession(Client client, Session session);
 
     /**
-     * Called when a server session is created with this protocol.
-     *
-     * @param server  The server that the session belongs to.
-     * @param session The created session.
-     */
-    public abstract void newServerSession(Server server, Session session);
-
-    /**
      * Clears all currently registered packets.
      */
     public final void clearPackets() {

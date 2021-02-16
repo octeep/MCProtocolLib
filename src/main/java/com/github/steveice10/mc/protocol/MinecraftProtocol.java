@@ -234,12 +234,6 @@ public class MinecraftProtocol extends PacketProtocol {
         session.addListener(new ClientListener());
     }
 
-    @Override
-    public void newServerSession(Server server, Session session) {
-        this.setSubProtocol(SubProtocol.HANDSHAKE, false, session);
-        session.addListener(new ServerListener());
-    }
-
     protected void enableEncryption(Key key) {
         try {
             this.encrypt = new AESEncryption(key);
