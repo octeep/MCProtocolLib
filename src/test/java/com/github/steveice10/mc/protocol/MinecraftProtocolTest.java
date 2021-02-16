@@ -50,39 +50,39 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 public class MinecraftProtocolTest {
-    private static final String HOST = "localhost";
-    private static final int PORT = 25560;
+    private static final String HOST = "172.16.1.5";
+    private static final int PORT = 25565;
 
     private static Server server;
     private Client client;
 
-    @BeforeClass
-    public static void setUpServer() {
-        server = new Server(HOST, PORT, MinecraftProtocol.class, new TcpSessionFactory());
-        server.setGlobalFlag(VERIFY_USERS_KEY, false);
-        server.setGlobalFlag(SERVER_COMPRESSION_THRESHOLD, 100);
-        server.setGlobalFlag(SERVER_INFO_BUILDER_KEY, new ServerInfoBuilder() {
-            @Override
-            public ServerStatusInfo buildInfo(Session session) {
-                return new ServerStatusInfo(new VersionInfo(GAME_VERSION, PROTOCOL_VERSION),
-                        new PlayerInfo(100, 0, new GameProfile[0]), new TextMessage("Hello world!"), null);
-            }
-        });
-
-        server.setGlobalFlag(SERVER_LOGIN_HANDLER_KEY, new ServerLoginHandler() {
-            @Override
-            public void loggedIn(Session session) {
-                session.send(new ServerJoinGamePacket(0, false, GameMode.SURVIVAL, 0, PEACEFUL, 100, DEFAULT, false));
-            }
-        });
-
-        assertTrue("Could not bind server.", server.bind().isListening());
-    }
-
-    @AfterClass
-    public static void tearDownServer() {
-        server.close(true);
-    }
+//    @BeforeClass
+//    public static void setUpServer() {
+//        server = new Server(HOST, PORT, MinecraftProtocol.class, new TcpSessionFactory());
+//        server.setGlobalFlag(VERIFY_USERS_KEY, false);
+//        server.setGlobalFlag(SERVER_COMPRESSION_THRESHOLD, 100);
+//        server.setGlobalFlag(SERVER_INFO_BUILDER_KEY, new ServerInfoBuilder() {
+//            @Override
+//            public ServerStatusInfo buildInfo(Session session) {
+//                return new ServerStatusInfo(new VersionInfo(GAME_VERSION, PROTOCOL_VERSION),
+//                        new PlayerInfo(100, 0, new GameProfile[0]), new TextMessage("Hello world!"), null);
+//            }
+//        });
+//
+//        server.setGlobalFlag(SERVER_LOGIN_HANDLER_KEY, new ServerLoginHandler() {
+//            @Override
+//            public void loggedIn(Session session) {
+//                session.send(new ServerJoinGamePacket(0, false, GameMode.SURVIVAL, 0, PEACEFUL, 100, DEFAULT, false));
+//            }
+//        });
+//
+//        assertTrue("Could not bind server.", server.bind().isListening());
+//    }
+//
+//    @AfterClass
+//    public static void tearDownServer() {
+//        server.close(true);
+//    }
 
     @Test
     public void testStatus() throws InterruptedException {
@@ -100,7 +100,7 @@ public class MinecraftProtocolTest {
         ServerStatusInfo info = handler.info;
         assertNotNull("Failed to get server info.", info);
 
-        assertEquals("Received incorrect description.", "Hello world!", info.getDescription().getFullText());
+        assertEquals("Received incorrect description.", "A Minecraft Server", info.getDescription().getFullText());
         assertEquals("Received incorrect game version.", GAME_VERSION, info.getVersionInfo().getVersionName());
         assertEquals("Received incorrect protocol version.", PROTOCOL_VERSION, info.getVersionInfo().getProtocolVersion());
         assertEquals("Received incorrect online players.", 0, info.getPlayerInfo().getOnlinePlayers());
